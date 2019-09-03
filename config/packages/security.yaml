@@ -1,0 +1,36 @@
+security:
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        in_memory: { memory: null }
+
+    # https://symfony.com/doc/current/reference/configuration/security.html#firewalls
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        login:
+            pattern: ^/v(\d+\.\d+)/login
+            stateless: true
+            anonymous: true
+            # https://symfony.com/doc/current/security/json_login_setup.html
+            json_login:
+                check_path: jwt_login
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+        refresh:
+            pattern: ^/v(\d+\.\d+)/refresh
+            stateless: true
+            anonymous: true
+        api:
+            pattern: ^/
+            stateless: true
+            # https://symfony.com/doc/current/security/guard_authentication.html
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
+
+    # https://symfony.com/doc/current/security/access_control.html
+    access_control:
+        - { path: ^/v(\d+\.\d+)/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/v(\d+\.\d+)/refresh, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: IS_AUTHENTICATED_FULLY }

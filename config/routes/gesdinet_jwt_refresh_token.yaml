@@ -1,0 +1,4 @@
+jwt_refresh:
+    path: /v1.0/refresh
+    methods: [POST]
+    controller: gesdinet.jwtrefreshtoken::refresh

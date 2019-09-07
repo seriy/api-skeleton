@@ -1,0 +1,23 @@
+App\Domain\Entity\User:
+    user_1:
+        email (unique): 'username@example.com'
+        username (unique): 'username'
+        password: '\$argon2id\$v=19\$m=65536,t=4,p=1\$FfJYqfgbnqhTRiOg2oBbog\$rnN5oJjMuVUgrOS4UmEHzVxxUypgodthKABUviGCBrQ'
+        roles: ['ROLE_ADMIN']
+        emailConfirmationToken: 'EmailConfirmationTokenEmailConfirmationT'
+        emailConfirmationRequestedAt: <identity(new \DateTimeImmutable())>
+        passwordResettingToken: 'PasswordResettingTokenPasswordResettingT'
+        passwordResettingRequestedAt: <identity(new \DateTimeImmutable())>
+    user_2:
+        email (unique): 'deleted@example.com'
+        username (unique): 'deleted'
+        password: '\$argon2id\$v=19\$m=65536,t=4,p=1\$FfJYqfgbnqhTRiOg2oBbog\$rnN5oJjMuVUgrOS4UmEHzVxxUypgodthKABUviGCBrQ'
+        roles: ['ROLE_USER']
+        emailConfirmed: true
+        deletedAt: <identity(new \DateTimeImmutable())>
+    user_{3..100}:
+        email (unique): <email()>
+        username (unique): <username()>
+        password: <text(10)>
+        roles: ['ROLE_USER']
+        emailConfirmed: true

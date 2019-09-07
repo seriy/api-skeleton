@@ -5,6 +5,7 @@
         "php": "^7.3",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-json": "*",
         "gesdinet/jwt-refresh-token-bundle": "^0.7.1",
         "lexik/jwt-authentication-bundle": "^2.6",
         "symfony/console": "4.3.*",

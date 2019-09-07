@@ -1,7 +1,19 @@
 security:
-    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    # https://symfony.com/doc/current/reference/configuration/security.html#encoders
+    encoders:
+        App\Domain\Entity\UserInterface:
+            algorithm: sodium
+
+    # https://symfony.com/doc/current/security/user_provider.html
     providers:
-        in_memory: { memory: null }
+        entity_provider:
+            entity:
+                class: App\Domain\Entity\User
+
+    # https://symfony.com/doc/current/security.html#security-role-hierarchy
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     # https://symfony.com/doc/current/reference/configuration/security.html#firewalls
     firewalls:
@@ -17,8 +29,8 @@ security:
                 check_path: jwt_login
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
-        refresh:
-            pattern: ^/v(\d+\.\d+)/refresh
+        public:
+            pattern: ^/v(\d+\.\d+)/(confirm|refresh|register|reset|set)
             stateless: true
             anonymous: true
         api:
@@ -31,6 +43,5 @@ security:
 
     # https://symfony.com/doc/current/security/access_control.html
     access_control:
-        - { path: ^/v(\d+\.\d+)/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/v(\d+\.\d+)/refresh, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/v(\d+\.\d+)/(confirm|login|refresh|register|reset|set), roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, roles: IS_AUTHENTICATED_FULLY }

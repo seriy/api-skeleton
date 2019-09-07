@@ -11,6 +11,11 @@
         <ini name="error_reporting" value="-1" />
         <server name="APP_ENV" value="test" force="true" />
         <server name="SHELL_VERBOSITY" value="-1" />
+        <env name="KEY_SALT" value="key_salt" />
+        <env name="USERNAME" value="username" />
+        <env name="PASSWORD" value="password" />
+        <env name="DELETED_USERNAME" value="username" />
+        <env name="DELETED_PASSWORD" value="password" />
     </php>
 
     <testsuites>

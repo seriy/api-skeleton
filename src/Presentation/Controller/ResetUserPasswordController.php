@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @OA\Get(
+ * @OA\Post(
  *      path="/v1.0/reset/password",
  *      operationId="reset_user_password",
  *      summary="Reset password",

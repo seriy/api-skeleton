@@ -28,7 +28,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *          in="path",
  *          required=true,
  *          description="User ID",
- *          @OA\Schema(type="integer", format="int32")
+ *          @OA\Schema(type="integer", format="int32", example="1")
  *      ),
  *      @OA\Response(response="200", description="successful operation",
  *          @OA\JsonContent(ref="#/components/schemas/single")

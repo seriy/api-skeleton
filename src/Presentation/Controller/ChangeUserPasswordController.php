@@ -28,7 +28,17 @@ use Symfony\Component\Routing\Annotation\Route;
  *          in="path",
  *          required=true,
  *          description="User ID",
- *          @OA\Schema(type="integer", format="int32")
+ *          @OA\Schema(type="integer", format="int32", example="1")
+ *      ),
+ *      @OA\RequestBody(
+ *          @OA\JsonContent(required={"type", "id", "attributes"},
+ *              @OA\Property(property="type", type="string", example="users"),
+ *              @OA\Property(property="id", type="string", example="1"),
+ *              @OA\Property(property="attributes", required={"currentPassword", "newPassword"},
+ *                  @OA\Property(property="currentPassword", type="string", example="5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8"),
+ *                  @OA\Property(property="newPassword", type="string", example="8331256dc146dbb33519fcde4a94d0bb942b1ef3")
+ *              )
+ *          )
  *      ),
  *      @OA\Response(response="200", description="successful operation",
  *          @OA\JsonContent(ref="#/components/schemas/single")

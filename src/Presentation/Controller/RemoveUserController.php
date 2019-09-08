@@ -28,7 +28,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *          in="path",
  *          required=true,
  *          description="User ID",
- *          @OA\Schema(type="integer", format="int32")
+ *          @OA\Schema(type="integer", format="int32", example="1")
  *      ),
  *      @OA\Response(response="204", description="successful operation"),
  *      @OA\Response(response="403", description="permission denied",

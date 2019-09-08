@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as BaseControll
 use Symfony\Component\Validator\Validation;
 
 /**
- * @OA\Info(title="API Skeleton", version="0.1.0")
+ * @OA\Info(title="API Skeleton", version="1.0.0")
  *
  *
  *

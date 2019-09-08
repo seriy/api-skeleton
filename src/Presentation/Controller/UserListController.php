@@ -24,16 +24,34 @@ use Symfony\Component\Routing\Annotation\Route;
  *          {"JWT": {}},
  *      },
  *      @OA\Parameter(
+ *          name="filter[id]",
+ *          in="query",
+ *          description="Filtering",
+ *          @OA\Schema(type="string", example="1")
+ *      ),
+ *      @OA\Parameter(
+ *          name="filter[username]",
+ *          in="query",
+ *          description="Filtering",
+ *          @OA\Schema(type="string", example="user")
+ *      ),
+ *      @OA\Parameter(
+ *          name="sort",
+ *          in="query",
+ *          description="Sorting",
+ *          @OA\Schema(type="string", example="-id")
+ *      ),
+ *      @OA\Parameter(
  *          name="page[limit]",
  *          in="query",
  *          description="Limit",
- *          @OA\Schema(type="integer", format="int32")
+ *          @OA\Schema(type="integer", format="int32", example="10")
  *      ),
  *      @OA\Parameter(
  *          name="page[offset]",
  *          in="query",
  *          description="Offset",
- *          @OA\Schema(type="integer", format="int32")
+ *          @OA\Schema(type="integer", format="int32", example="0")
  *      ),
  *      @OA\Response(response="200", description="successful operation",
  *          @OA\JsonContent(ref="#/components/schemas/collection")

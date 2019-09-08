@@ -23,6 +23,16 @@ use Symfony\Component\Routing\Annotation\Route;
  *      security={
  *          {"Key": {}},
  *      },
+ *      @OA\RequestBody(
+ *          @OA\JsonContent(required={"type", "attributes"},
+ *              @OA\Property(property="type", type="string", example="users"),
+ *              @OA\Property(property="attributes", required={"email", "username", "password"},
+ *                  @OA\Property(property="email", type="string", example="email@domain.com"),
+ *                  @OA\Property(property="username", type="string", example="username"),
+ *                  @OA\Property(property="password", type="string", example="5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8")
+ *              )
+ *          )
+ *      ),
  *      @OA\Response(response="201", description="successful operation",
  *          @OA\JsonContent(ref="#/components/schemas/single")
  *      ),

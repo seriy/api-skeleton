@@ -28,7 +28,15 @@ use Symfony\Component\Routing\Annotation\Route;
  *          in="path",
  *          required=true,
  *          description="Resetting token",
- *          @OA\Schema(type="string")
+ *          @OA\Schema(type="string", example="8331256dc146dbb33519fcde4a94d0bb942b1ef3")
+ *      ),
+ *      @OA\RequestBody(
+ *          @OA\JsonContent(required={"type", "attributes"},
+ *              @OA\Property(property="type", type="string", example="users"),
+ *              @OA\Property(property="attributes", required={"newPassword"},
+ *                  @OA\Property(property="newPassword", type="string", example="5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8")
+ *              )
+ *          )
  *      ),
  *      @OA\Response(response="204", description="successful operation"),
  *      @OA\Response(response="400", description="validation errors",

@@ -28,7 +28,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *          in="path",
  *          required=true,
  *          description="Confirmation token",
- *          @OA\Schema(type="string")
+ *          @OA\Schema(type="string", example="8331256dc146dbb33519fcde4a94d0bb942b1ef3")
  *      ),
  *      @OA\Response(response="204", description="successful operation"),
  *      @OA\Response(response="400", description="validation errors",

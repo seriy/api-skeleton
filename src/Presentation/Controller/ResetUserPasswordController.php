@@ -23,6 +23,14 @@ use Symfony\Component\Routing\Annotation\Route;
  *      security={
  *          {"Key": {}},
  *      },
+ *      @OA\RequestBody(
+ *          @OA\JsonContent(required={"type", "attributes"},
+ *              @OA\Property(property="type", type="string", example="users"),
+ *              @OA\Property(property="attributes", required={"email"},
+ *                  @OA\Property(property="email", type="string", example="email@domain.com")
+ *              )
+ *          )
+ *      ),
  *      @OA\Response(response="204", description="successful operation"),
  *      @OA\Response(response="400", description="validation errors",
  *          @OA\JsonContent(ref="#/components/schemas/queryErrors")

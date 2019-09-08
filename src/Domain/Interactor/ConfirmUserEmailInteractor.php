@@ -17,8 +17,6 @@ use function sprintf;
 
 class ConfirmUserEmailInteractor implements InteractorInterface
 {
-    use UserCheckerTrait;
-
     private $userRepository;
 
     public function __construct(UserRepositoryInterface $userRepository)

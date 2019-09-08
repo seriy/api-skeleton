@@ -13,8 +13,6 @@ use App\Domain\Repository\UserRepositoryInterface;
 
 class RecoverUserInteractor implements InteractorInterface
 {
-    use UserCheckerTrait;
-
     private $userRepository;
 
     public function __construct(UserRepositoryInterface $userRepository)

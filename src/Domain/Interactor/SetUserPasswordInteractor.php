@@ -17,8 +17,6 @@ use DateTimeImmutable;
 
 class SetUserPasswordInteractor implements InteractorInterface
 {
-    use UserCheckerTrait;
-
     private $userRepository;
     private $passwordEncoder;
 

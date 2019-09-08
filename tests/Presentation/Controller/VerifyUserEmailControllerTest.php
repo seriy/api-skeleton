@@ -12,18 +12,7 @@ class VerifyUserEmailControllerTest extends WebTestCase
     public function testBadRequest()
     {
         $client = $this->createClientWithJwt(getenv('USERNAME'), getenv('PASSWORD'));
-        $client->request(
-            'POST',
-            '/v1.0/users/1/email/verify',
-            [],
-            [],
-            [],
-            json_encode([
-                'data' => [
-                    'type' => 'users',
-                ],
-            ])
-        );
+        $client->request('POST', '/v1.0/users/4294967296/email/verify');
 
         $this->assertEquals(400, $client->getResponse()->getStatusCode());
         $this->assertJson($client->getResponse()->getContent());

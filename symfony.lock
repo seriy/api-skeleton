@@ -116,6 +116,9 @@
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
+    "json-api-php/json-api": {
+        "version": "2.1.0"
+    },
     "lcobucci/jwt": {
         "version": "3.3.1"
     },
@@ -155,15 +158,6 @@
     },
     "ocramius/proxy-manager": {
         "version": "2.2.3"
-    },
-    "phpdocumentor/reflection-common": {
-        "version": "1.0.1"
-    },
-    "phpdocumentor/reflection-docblock": {
-        "version": "4.3.1"
-    },
-    "phpdocumentor/type-resolver": {
-        "version": "0.4.0"
     },
     "psr/cache": {
         "version": "1.0.1"
@@ -318,9 +312,6 @@
     "symfony/property-access": {
         "version": "v4.3.4"
     },
-    "symfony/property-info": {
-        "version": "v4.3.4"
-    },
     "symfony/routing": {
         "version": "4.2",
         "recipe": {
@@ -359,12 +350,6 @@
     },
     "symfony/security-http": {
         "version": "v4.3.4"
-    },
-    "symfony/serializer": {
-        "version": "v4.3.4"
-    },
-    "symfony/serializer-pack": {
-        "version": "v1.0.2"
     },
     "symfony/service-contracts": {
         "version": "v1.1.6"
@@ -405,9 +390,6 @@
             "version": "1.0",
             "ref": "fe5a50faf580eb58f08ada2abe8afbd2d4941e05"
         }
-    },
-    "webmozart/assert": {
-        "version": "1.5.0"
     },
     "zendframework/zend-code": {
         "version": "3.3.2"

@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Presentation\Controller;
 
 use App\Domain\Entity\UserInterface;
+use App\Presentation\Presenter\ConstraintViolationListPresenterTrait;
 use App\Presentation\Service\RequestParser;
+use JsonApiPhp\JsonApi\ErrorDocument;
 use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as BaseController;
 use Symfony\Component\Validator\Validation;
@@ -79,6 +81,8 @@ use Symfony\Component\Validator\Validation;
  */
 class AbstractController extends BaseController
 {
+    use ConstraintViolationListPresenterTrait;
+
     protected $request;
     private $validator;
 
@@ -95,14 +99,14 @@ class AbstractController extends BaseController
         return ($user instanceof UserInterface) ? $user->getId() : null;
     }
 
-    protected function validate($constraints = null): ?array
+    protected function validate($constraints = null): ?ErrorDocument
     {
-        $errors = $this->validator->validate($this->request->getData(), $constraints);
+        $violations = $this->validator->validate($this->request->getData(), $constraints);
 
-        if (0 === $errors->count()) {
+        if (0 === $violations->count()) {
             return null;
         }
 
-        return ['errors' => $errors];
+        return $this->normalize($violations);
     }
 }

@@ -5,9 +5,15 @@ declare(strict_types=1);
 namespace App\Presentation\Presenter;
 
 use App\Domain\Presenter\PresenterInterface;
+use JsonApiPhp\JsonApi\DataDocument;
+use JsonApiPhp\JsonApi\JsonApi;
+use JsonApiPhp\JsonApi\Link\SelfLink;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class VerifyUserEmailPresenter implements PresenterInterface
 {
+    use UserPresenterTrait;
+
     /** @var \App\Domain\Output\VerifyUserEmailOutput */
     private $output;
 
@@ -16,10 +22,16 @@ class VerifyUserEmailPresenter implements PresenterInterface
         $this->output = $output;
     }
 
-    public function getOutput(): array
+    public function getOutput(): DataDocument
     {
-        return [
-            'data' => $this->output->user,
-        ];
+        return new DataDocument(
+            $this->normalize($this->output->user),
+            new SelfLink($this->urlGenerator->generate(
+                'verify_user_email',
+                ['userId' => $this->output->user->getId()],
+                UrlGeneratorInterface::ABSOLUTE_URL
+            )),
+            new JsonApi()
+        );
     }
 }

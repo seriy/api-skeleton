@@ -43,6 +43,18 @@ interface UserInterface extends BaseInterface, EntityInterface
 
     public function isAdmin(): bool;
 
+    /**
+     * @return string[]
+     */
+    public function getDeviceTokens(): array;
+
+    /**
+     * @param string[] $deviceTokens
+     */
+    public function setDeviceTokens(array $deviceTokens);
+
+    public function addDeviceToken(string $deviceToken);
+
     public function setEmailConfirmed(bool $confirmed);
 
     public function isEmailConfirmed(): bool;

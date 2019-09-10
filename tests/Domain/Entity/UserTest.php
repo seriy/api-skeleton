@@ -58,6 +58,15 @@ class UserTest extends TestCase
         $this->assertFalse($user->isAdmin());
     }
 
+    public function testDeviceTokens()
+    {
+        $user = new User();
+        $this->assertEquals([], $user->getDeviceTokens());
+
+        $user->setDeviceTokens($tokens = ['token']);
+        $this->assertEquals($tokens, $user->getDeviceTokens());
+    }
+
     public function testEmailConfirmed()
     {
         $user = new User();

@@ -15,6 +15,7 @@
         <field name="username" length="40" unique="true" />
         <field name="password" length="191" />
         <field name="roles" type="json" />
+        <field name="deviceTokens" type="json" />
         <field name="emailConfirmed" type="boolean" />
         <field name="emailConfirmationToken" length="40" unique="true" nullable="true" />
         <field name="emailConfirmationRequestedAt" type="datetime_immutable" nullable="true" />

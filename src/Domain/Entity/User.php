@@ -15,6 +15,7 @@ class User implements UserInterface
     private $username;
     private $password;
     private $roles;
+    private $deviceTokens;
     private $emailConfirmed;
     private $emailConfirmationToken;
     private $emailConfirmationRequestedAt;
@@ -27,6 +28,7 @@ class User implements UserInterface
     public function __construct()
     {
         $this->roles = [RoleInterface::USER];
+        $this->deviceTokens = [];
         $this->emailConfirmed = false;
         $this->createdAt = new DateTimeImmutable();
     }
@@ -107,6 +109,34 @@ class User implements UserInterface
     public function isAdmin(): bool
     {
         return $this->hasRole(RoleInterface::ADMIN);
+    }
+
+    public function getDeviceTokens(): array
+    {
+        return $this->deviceTokens;
+    }
+
+    public function setDeviceTokens(array $deviceTokens): self
+    {
+        foreach ($deviceTokens as $deviceToken) {
+            $this->addDeviceToken($deviceToken);
+        }
+
+        return $this;
+    }
+
+    public function addDeviceToken(string $deviceToken): self
+    {
+        if (!$this->hasDeviceToken($deviceToken)) {
+            $this->deviceTokens[] = $deviceToken;
+        }
+
+        return $this;
+    }
+
+    public function hasDeviceToken(string $deviceToken): bool
+    {
+        return in_array($deviceToken, $this->deviceTokens, true);
     }
 
     public function setEmailConfirmed(bool $confirmed): self

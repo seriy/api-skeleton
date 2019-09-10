@@ -26,13 +26,13 @@ use Symfony\Component\Routing\Annotation\Route;
  *      @OA\Parameter(
  *          name="filter[id]",
  *          in="query",
- *          description="Filtering",
+ *          description="Filter by id",
  *          @OA\Schema(type="string", example="1")
  *      ),
  *      @OA\Parameter(
  *          name="filter[username]",
  *          in="query",
- *          description="Filtering",
+ *          description="Filter by username",
  *          @OA\Schema(type="string", example="user")
  *      ),
  *      @OA\Parameter(

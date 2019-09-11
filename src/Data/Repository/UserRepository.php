@@ -59,12 +59,12 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
     public function isEmailTaken(string $email, int $ownerId = 0): bool
     {
         return null !== $this->createQueryBuilder('u')
-                ->where('u.email = :email')
-                ->andWhere('u.id != :userId')
-                ->setParameter('email', $email)
-                ->setParameter('userId', $ownerId)
-                ->getQuery()
-                ->getOneOrNullResult();
+            ->where('u.email = :email')
+            ->andWhere('u.id != :userId')
+            ->setParameter('email', $email)
+            ->setParameter('userId', $ownerId)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 
     /**

@@ -19,5 +19,6 @@
 ###< symfony/phpunit-bridge ###
 
 ###> app ###
+/public/files/
 /public/openapi.json
 ###< app ###

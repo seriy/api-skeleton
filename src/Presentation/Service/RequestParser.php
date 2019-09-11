@@ -131,6 +131,8 @@ class RequestParser
 
         return array_merge_recursive(
             $query,
+            $this->request->request->all(),
+            $this->request->files->all(),
             (array) json_decode($this->request->getContent(), true),
             $this->request->attributes->all()['_route_params'],
         );

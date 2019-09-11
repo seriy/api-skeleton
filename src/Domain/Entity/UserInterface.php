@@ -14,6 +14,7 @@ use Symfony\Component\Security\Core\User\UserInterface as BaseInterface;
 interface UserInterface extends BaseInterface, EntityInterface
 {
     public const NAME = 'users';
+    public const DEFAULT_PHOTO = 'files/default.png';
     public const DAYS_BEFORE_USER_DELETION = 30;
     public const SECONDS_BEFORE_TOKEN_EXPIRATION = 3600;
 
@@ -30,6 +31,10 @@ interface UserInterface extends BaseInterface, EntityInterface
     public function getPassword(): ?string;
 
     public function setPassword(string $password);
+
+    public function getPhoto(): string;
+
+    public function setPhoto(string $photo);
 
     /**
      * @return string[]

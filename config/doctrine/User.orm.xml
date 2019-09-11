@@ -14,6 +14,7 @@
         <field name="email" length="191" unique="true" />
         <field name="username" length="40" unique="true" />
         <field name="password" length="191" />
+        <field name="photo" length="191" nullable="true" />
         <field name="roles" type="json" />
         <field name="deviceTokens" type="json" />
         <field name="emailConfirmed" type="boolean" />

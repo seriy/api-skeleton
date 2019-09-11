@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Domain\Entity;
 
 use App\Domain\Entity\User;
+use App\Domain\Entity\UserInterface;
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 
@@ -41,6 +42,15 @@ class UserTest extends TestCase
 
         $user->setPassword($password = 'password');
         $this->assertEquals($password, $user->getPassword());
+    }
+
+    public function testPhoto()
+    {
+        $user = new User();
+        $this->assertEquals(UserInterface::DEFAULT_PHOTO, $user->getPhoto());
+
+        $user->setPhoto($photo = 'files/1.jpg');
+        $this->assertEquals($photo, $user->getPhoto());
     }
 
     public function testRoles()

@@ -14,6 +14,7 @@ class User implements UserInterface
     private $email;
     private $username;
     private $password;
+    private $photo;
     private $roles;
     private $deviceTokens;
     private $emailConfirmed;
@@ -70,6 +71,18 @@ class User implements UserInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    public function getPhoto(): string
+    {
+        return $this->photo ?: self::DEFAULT_PHOTO;
+    }
+
+    public function setPhoto(?string $photo): self
+    {
+        $this->photo = $photo;
 
         return $this;
     }

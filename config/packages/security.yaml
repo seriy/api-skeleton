@@ -6,9 +6,10 @@ security:
 
     # https://symfony.com/doc/current/security/user_provider.html
     providers:
-        entity_provider:
-            entity:
-                class: App\Domain\Entity\User
+        default_provider:
+            id: App\Presentation\Security\UserProvider
+        login_provider:
+            entity: { class: App\Domain\Entity\User }
 
     # https://symfony.com/doc/current/security.html#security-role-hierarchy
     role_hierarchy:
@@ -27,6 +28,7 @@ security:
             # https://symfony.com/doc/current/security/json_login_setup.html
             json_login:
                 check_path: jwt_login
+                provider: login_provider
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
         public:
@@ -38,6 +40,7 @@ security:
             stateless: true
             # https://symfony.com/doc/current/security/guard_authentication.html
             guard:
+                provider: default_provider
                 authenticators:
                     - lexik_jwt_authentication.jwt_token_authenticator
 

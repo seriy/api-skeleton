@@ -12,11 +12,7 @@ class UserInfoValidationRules implements ValidationRulesInterface
     public function getRules(): Constraint
     {
         return new Assert\Collection(['fields' => [
-            'userId' => new Assert\Required([
-                new Assert\NotBlank(),
-                new Assert\Type(['type' => 'string']),
-                new Assert\Range(['min' => 1, 'max' => self::MAX_INT]),
-            ]),
+            'userId' => new Assert\Required(UserValidationRules::getIdRules()),
         ]]);
     }
 }

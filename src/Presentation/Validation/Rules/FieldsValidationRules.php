@@ -16,6 +16,7 @@ class FieldsValidationRules
 
         foreach ($fields as $entity => $values) {
             $constraints[$entity] = new Assert\Optional([
+                new Assert\NotBlank(),
                 new Assert\Type(['type' => 'array']),
                 new Assert\All(new Assert\Type(['type' => 'string'])),
                 new Assert\Choice(['choices' => array_unique($values), 'multiple' => true]),

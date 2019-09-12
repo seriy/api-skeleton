@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class PageValidationRules
 {
-    public function getRules(): Constraint
+    public static function getRules(): Constraint
     {
         return new Assert\Optional(new Assert\Collection(['fields' => [
             'limit' => new Assert\Optional([

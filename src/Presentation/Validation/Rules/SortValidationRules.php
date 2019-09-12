@@ -10,7 +10,7 @@ use function array_unique;
 
 class SortValidationRules
 {
-    public function getRules(array $fields = []): Constraint
+    public static function getRules(array $fields = []): Constraint
     {
         $choices = [];
 
@@ -20,6 +20,7 @@ class SortValidationRules
         }
 
         return new Assert\Optional([
+            new Assert\NotBlank(),
             new Assert\Type(['type' => 'array']),
             new Assert\All(new Assert\Type(['type' => 'string'])),
             new Assert\Choice(['choices' => array_unique($choices), 'multiple' => true]),

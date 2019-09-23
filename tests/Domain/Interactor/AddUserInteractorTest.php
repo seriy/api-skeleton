@@ -22,7 +22,9 @@ class AddUserInteractorTest extends TestCase
         $input = new AddUserInput(
             $email = 'username@example.com',
             $username = 'username',
-            $password = 'password'
+            $password = 'password',
+            $firstName = 'first',
+            $lastName = 'last'
         );
 
         $userRepository = $this->createMock(UserRepositoryInterface::class);
@@ -43,7 +45,9 @@ class AddUserInteractorTest extends TestCase
         $input = new AddUserInput(
             $email = 'username@example.com',
             $username = 'username',
-            $password = 'password'
+            $password = 'password',
+            $firstName = 'first',
+            $lastName = 'last'
         );
 
         $userRepository = $this->createMock(UserRepositoryInterface::class);
@@ -67,7 +71,9 @@ class AddUserInteractorTest extends TestCase
         $input = new AddUserInput(
             $email = 'username@example.com',
             $username = 'username',
-            $password = 'password'
+            $password = 'password',
+            $firstName = 'first',
+            $lastName = 'last'
         );
 
         $userRepository = $this->createMock(UserRepositoryInterface::class);
@@ -86,7 +92,7 @@ class AddUserInteractorTest extends TestCase
         $userFactory
             ->expects($this->once())
             ->method('create')
-            ->with($email, $username, $password)
+            ->with($email, $password, $username, $firstName, $lastName)
             ->willReturn($user = $this->createMock(UserInterface::class));
 
         $user

@@ -10,7 +10,7 @@ use function array_unique;
 
 class IncludeValidationRules
 {
-    public function getRules(array $fields = []): Constraint
+    public static function getRules(array $fields = []): Constraint
     {
         return new Assert\Optional([
             new Assert\NotBlank(),

@@ -22,7 +22,9 @@ class EditUserInteractorTest extends TestCase
             $currentUserId = 1,
             $userId = 1,
             $email = 'username@example.com',
-            $username = 'username'
+            $username = 'username',
+            $firstName = 'first',
+            $lastName = 'last'
         );
 
         $userRepository = $this->createMock(UserRepositoryInterface::class);
@@ -44,7 +46,9 @@ class EditUserInteractorTest extends TestCase
             $currentUserId = 1,
             $userId = 2,
             $email = 'username@example.com',
-            $username = 'username'
+            $username = 'username',
+            $firstName = 'first',
+            $lastName = 'last'
         );
 
         $userRepository = $this->createMock(UserRepositoryInterface::class);
@@ -66,7 +70,9 @@ class EditUserInteractorTest extends TestCase
             $currentUserId = 1,
             $userId = 1,
             $email = 'username@example.com',
-            $username = 'username'
+            $username = 'username',
+            $firstName = 'first',
+            $lastName = 'last'
         );
 
         $userRepository = $this->createMock(UserRepositoryInterface::class);
@@ -93,7 +99,9 @@ class EditUserInteractorTest extends TestCase
             $currentUserId = 1,
             $userId = 1,
             $email = 'username@example.com',
-            $username = 'username'
+            $username = 'username',
+            $firstName = 'first',
+            $lastName = 'last'
         );
 
         $userRepository = $this->createMock(UserRepositoryInterface::class);
@@ -123,7 +131,9 @@ class EditUserInteractorTest extends TestCase
             $currentUserId = 1,
             $userId = 1,
             $email = 'username@example.com',
-            $username = 'username'
+            $username = 'username',
+            $firstName = 'first',
+            $lastName = 'last'
         );
 
         $userRepository = $this->createMock(UserRepositoryInterface::class);
@@ -151,6 +161,14 @@ class EditUserInteractorTest extends TestCase
             ->expects($this->once())
             ->method('setUsername')
             ->with($username);
+        $user
+            ->expects($this->once())
+            ->method('setFirstName')
+            ->with($firstName);
+        $user
+            ->expects($this->once())
+            ->method('setLastName')
+            ->with($lastName);
 
         $userRepository
             ->expects($this->once())
@@ -172,7 +190,9 @@ class EditUserInteractorTest extends TestCase
             $currentUserId = 1,
             $userId = 1,
             $email = 'username@example.com',
-            $username = 'username'
+            $username = 'username',
+            $firstName = 'first',
+            $lastName = 'last'
         );
 
         $userRepository = $this->createMock(UserRepositoryInterface::class);
@@ -210,6 +230,14 @@ class EditUserInteractorTest extends TestCase
             ->expects($this->once())
             ->method('setUsername')
             ->with($username);
+        $user
+            ->expects($this->once())
+            ->method('setFirstName')
+            ->with($firstName);
+        $user
+            ->expects($this->once())
+            ->method('setLastName')
+            ->with($lastName);
 
         $userRepository
             ->expects($this->once())

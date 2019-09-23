@@ -7,14 +7,14 @@ namespace App\Tests\Presentation\Controller;
 use App\Presentation\Test\WebTestCase;
 use function getenv;
 
-class EditUserControllerTest extends WebTestCase
+class AddOAuthProviderControllerTest extends WebTestCase
 {
     public function testBadRequest()
     {
         $client = $this->createClientWithJwt(getenv('USERNAME'), getenv('PASSWORD'));
         $client->request(
-            'PATCH',
-            '/v1.0/users/1',
+            'POST',
+            '/v1.0/users/1/providers/google',
             [],
             [],
             [],
@@ -23,10 +23,7 @@ class EditUserControllerTest extends WebTestCase
                     'type' => 'users',
                     'id' => '1',
                     'attributes' => [
-                        'email' => '',
-                        'username' => '',
-                        'firstName' => '',
-                        'lastName' => '',
+                        'code' => '',
                     ],
                 ],
             ])
@@ -41,8 +38,8 @@ class EditUserControllerTest extends WebTestCase
     {
         $client = $this->createClientWithJwt(getenv('USERNAME'), getenv('PASSWORD'));
         $client->request(
-            'PATCH',
-            '/v1.0/users/1',
+            'POST',
+            '/v1.0/users/1/providers/google',
             [],
             [],
             [],
@@ -51,10 +48,7 @@ class EditUserControllerTest extends WebTestCase
                     'type' => 'users',
                     'id' => '2',
                     'attributes' => [
-                        'email' => 'username@example.com',
-                        'username' => 'user',
-                        'firstName' => 'first',
-                        'lastName' => 'last',
+                        'code' => '4/rQEr5DHX11CFp8VruEMecYazHJOZRe_Ea8vIVCMqkGKKaDK2oChpU9RD2830oJm_lEc_Te8jrFJiBW5ga5ygOGU',
                     ],
                 ],
             ])
@@ -69,8 +63,8 @@ class EditUserControllerTest extends WebTestCase
     {
         $client = $this->createClientWithJwt(getenv('USERNAME'), getenv('PASSWORD'));
         $client->request(
-            'PATCH',
-            '/v1.0/users/1',
+            'POST',
+            '/v1.0/users/1/providers/google',
             [],
             [],
             [],
@@ -79,10 +73,7 @@ class EditUserControllerTest extends WebTestCase
                     'type' => 'users',
                     'id' => '1',
                     'attributes' => [
-                        'email' => 'username@example.com',
-                        'username' => 'user',
-                        'firstName' => 'first',
-                        'lastName' => 'last',
+                        'code' => '4/rQEr5DHX11CFp8VruEMecYazHJOZRe_Ea8vIVCMqkGKKaDK2oChpU9RD2830oJm_lEc_Te8jrFJiBW5ga5ygOGU',
                     ],
                 ],
             ])

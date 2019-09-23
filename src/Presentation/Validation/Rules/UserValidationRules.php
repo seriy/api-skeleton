@@ -6,6 +6,7 @@ namespace App\Presentation\Validation\Rules;
 
 use App\Domain\Entity\UserInterface;
 use DateTimeImmutable;
+use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
@@ -35,6 +36,15 @@ class UserValidationRules
         ];
     }
 
+    public static function getProviderRules(): Constraint
+    {
+        return new Assert\Optional([
+            new Assert\NotBlank(),
+            new Assert\Type(['type' => 'string']),
+            new Assert\Choice(['choices' => UserInterface::SUPPORTED_OAUTH_PROVIDERS]),
+        ]);
+    }
+
     /**
      * @return \Symfony\Component\Validator\Constraint[]
      */
@@ -56,7 +66,8 @@ class UserValidationRules
         return [
             new Assert\NotBlank(),
             new Assert\Type(['type' => 'string']),
-            new Assert\Length(['min' => 1, 'max' => 40]),
+            new Assert\Length(['min' => 3, 'max' => 40]),
+            new Assert\Regex(['pattern' => '/^[a-zA-Z0-9\._]+$/']),
         ];
     }
 
@@ -129,6 +140,18 @@ class UserValidationRules
             new Assert\NotBlank(),
             new Assert\Type(['type' => 'string']),
             new Assert\Length(['min' => 64, 'max' => 191]),
+        ];
+    }
+
+    /**
+     * @return \Symfony\Component\Validator\Constraint[]
+     */
+    public static function getAuthorizationCodeRules(): array
+    {
+        return [
+            new Assert\NotBlank(),
+            new Assert\Type(['type' => 'string']),
+            new Assert\Length(['min' => 10, 'max' => 191]),
         ];
     }
 

@@ -36,4 +36,9 @@ class AuthenticationError
         'status' => 401,
         'message' => 'JWT is expired.',
     ];
+    public const AUTHORIZATION_CODE_NOT_FOUND = [
+        'code' => 7,
+        'status' => 401,
+        'message' => 'Authorization code not found.',
+    ];
 }

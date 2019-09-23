@@ -97,7 +97,7 @@ class AbstractController extends BaseController
 
     protected function validate($constraints = null): ?array
     {
-        $errors = $this->validator->validate($this->request->getData(), $constraints);
+        $errors = $this->validator->validate($this->request->getArray(), $constraints);
 
         if (0 === $errors->count()) {
             return null;

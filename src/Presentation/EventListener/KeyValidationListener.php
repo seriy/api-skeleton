@@ -35,7 +35,7 @@ class KeyValidationListener
 
     private function isSupported(string $path): bool
     {
-        return (bool) preg_match('/^\/v(\d+\.\d+)\/(confirm|login|refresh|register|reset|set)/', $path);
+        return (bool) preg_match('/^\/v(\d+\.\d+)\/(connect|confirm|login|refresh|register|reset|set)/', $path);
     }
 
     private function getKey(Request $request): ?string

@@ -1,0 +1,3 @@
+oauth_login:
+    path: /v1.0/connect/{provider}
+    methods: [POST]

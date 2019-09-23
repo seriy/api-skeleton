@@ -11,9 +11,12 @@
                 <option name="unsigned">true</option>
             </options>
         </id>
+        <field name="googleId" length="191" nullable="true" />
         <field name="email" length="191" unique="true" />
         <field name="username" length="40" unique="true" />
         <field name="password" length="191" />
+        <field name="firstName" length="40" />
+        <field name="lastName" length="40" />
         <field name="photo" length="191" nullable="true" />
         <field name="roles" type="json" />
         <field name="deviceTokens" type="json" />

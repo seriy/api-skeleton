@@ -26,10 +26,12 @@ use Symfony\Component\Routing\Annotation\Route;
  *      @OA\RequestBody(
  *          @OA\JsonContent(required={"type", "attributes"},
  *              @OA\Property(property="type", type="string", example="users"),
- *              @OA\Property(property="attributes", required={"email", "username", "password"},
+ *              @OA\Property(property="attributes", required={"email", "username", "password", "firstName", "lastName"},
  *                  @OA\Property(property="email", type="string", example="email@domain.com"),
  *                  @OA\Property(property="username", type="string", example="username"),
- *                  @OA\Property(property="password", type="string", example="5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8")
+ *                  @OA\Property(property="password", type="string", example="5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8"),
+ *                  @OA\Property(property="firstName", type="string", example="John"),
+ *                  @OA\Property(property="lastName", type="string", example="Doe")
  *              )
  *          )
  *      ),
@@ -58,7 +60,9 @@ class AddUserController extends AbstractController
         $input = new AddUserInput(
             $this->request->getString('data.attributes.email'),
             $this->request->getString('data.attributes.username'),
-            $this->request->getString('data.attributes.password')
+            $this->request->getString('data.attributes.password'),
+            $this->request->getString('data.attributes.firstName'),
+            $this->request->getString('data.attributes.lastName')
         );
 
         $interactor->execute($input, $presenter);

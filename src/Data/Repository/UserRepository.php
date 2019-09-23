@@ -31,6 +31,11 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
         return $this->findOneBy(['email' => $email]);
     }
 
+    public function getUserByGoogleId(string $googleId): ?UserInterface
+    {
+        return $this->findOneBy(['googleId' => $googleId]);
+    }
+
     public function getUserByEmailConfirmationToken(string $token): ?UserInterface
     {
         return $this->findOneBy(['emailConfirmationToken' => $token]);
@@ -114,6 +119,14 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
 
         if (isset($filters['username'])) {
             $this->addWhere($builder, 'u.username', 'like', $filters['username'], $counter);
+        }
+
+        if (isset($filters['firstName'])) {
+            $this->addWhere($builder, 'u.firstName', 'like', $filters['firstName'], $counter);
+        }
+
+        if (isset($filters['lastName'])) {
+            $this->addWhere($builder, 'u.lastName', 'like', $filters['lastName'], $counter);
         }
 
         foreach ($sorts as $value) {

@@ -5,15 +5,20 @@ declare(strict_types=1);
 namespace App\Domain\Entity;
 
 use DateTimeImmutable;
+use function implode;
 use function in_array;
 use function mb_strtoupper;
+use function trim;
 
 class User implements UserInterface
 {
     private $id;
+    private $googleId;
     private $email;
     private $username;
     private $password;
+    private $firstName;
+    private $lastName;
     private $photo;
     private $roles;
     private $deviceTokens;
@@ -37,6 +42,18 @@ class User implements UserInterface
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getGoogleId(): ?string
+    {
+        return $this->googleId;
+    }
+
+    public function setGoogleId(?string $googleId): self
+    {
+        $this->googleId = $googleId;
+
+        return $this;
     }
 
     public function getEmail(): ?string
@@ -73,6 +90,35 @@ class User implements UserInterface
         $this->password = $password;
 
         return $this;
+    }
+
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName(string $firstName): self
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(string $lastName): self
+    {
+        $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    public function getFullName(): string
+    {
+        return trim(implode(' ', [$this->firstName, $this->lastName]));
     }
 
     public function getPhoto(): string

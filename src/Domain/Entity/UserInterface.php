@@ -17,8 +17,13 @@ interface UserInterface extends BaseInterface, EntityInterface
     public const DEFAULT_PHOTO = 'files/default.png';
     public const DAYS_BEFORE_USER_DELETION = 30;
     public const SECONDS_BEFORE_TOKEN_EXPIRATION = 3600;
+    public const SUPPORTED_OAUTH_PROVIDERS = ['google'];
 
     public function getId(): ?int;
+
+    public function getGoogleId(): ?string;
+
+    public function setGoogleId(?string $googleId);
 
     public function getEmail(): ?string;
 
@@ -32,9 +37,19 @@ interface UserInterface extends BaseInterface, EntityInterface
 
     public function setPassword(string $password);
 
+    public function getFirstName(): ?string;
+
+    public function setFirstName(string $firstName);
+
+    public function getLastName(): ?string;
+
+    public function setLastName(string $lastName);
+
+    public function getFullName(): string;
+
     public function getPhoto(): string;
 
-    public function setPhoto(string $photo);
+    public function setPhoto(?string $photo);
 
     /**
      * @return string[]

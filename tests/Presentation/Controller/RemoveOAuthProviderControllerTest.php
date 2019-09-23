@@ -7,30 +7,12 @@ namespace App\Tests\Presentation\Controller;
 use App\Presentation\Test\WebTestCase;
 use function getenv;
 
-class EditUserControllerTest extends WebTestCase
+class RemoveOAuthProviderControllerTest extends WebTestCase
 {
     public function testBadRequest()
     {
         $client = $this->createClientWithJwt(getenv('USERNAME'), getenv('PASSWORD'));
-        $client->request(
-            'PATCH',
-            '/v1.0/users/1',
-            [],
-            [],
-            [],
-            json_encode([
-                'data' => [
-                    'type' => 'users',
-                    'id' => '1',
-                    'attributes' => [
-                        'email' => '',
-                        'username' => '',
-                        'firstName' => '',
-                        'lastName' => '',
-                    ],
-                ],
-            ])
-        );
+        $client->request('DELETE', '/v1.0/users/1/providers/google');
 
         $this->assertEquals(400, $client->getResponse()->getStatusCode());
         $this->assertJson($client->getResponse()->getContent());
@@ -41,8 +23,8 @@ class EditUserControllerTest extends WebTestCase
     {
         $client = $this->createClientWithJwt(getenv('USERNAME'), getenv('PASSWORD'));
         $client->request(
-            'PATCH',
-            '/v1.0/users/1',
+            'DELETE',
+            '/v1.0/users/1/providers/google',
             [],
             [],
             [],
@@ -50,12 +32,6 @@ class EditUserControllerTest extends WebTestCase
                 'data' => [
                     'type' => 'users',
                     'id' => '2',
-                    'attributes' => [
-                        'email' => 'username@example.com',
-                        'username' => 'user',
-                        'firstName' => 'first',
-                        'lastName' => 'last',
-                    ],
                 ],
             ])
         );
@@ -69,8 +45,8 @@ class EditUserControllerTest extends WebTestCase
     {
         $client = $this->createClientWithJwt(getenv('USERNAME'), getenv('PASSWORD'));
         $client->request(
-            'PATCH',
-            '/v1.0/users/1',
+            'DELETE',
+            '/v1.0/users/1/providers/google',
             [],
             [],
             [],
@@ -78,18 +54,10 @@ class EditUserControllerTest extends WebTestCase
                 'data' => [
                     'type' => 'users',
                     'id' => '1',
-                    'attributes' => [
-                        'email' => 'username@example.com',
-                        'username' => 'user',
-                        'firstName' => 'first',
-                        'lastName' => 'last',
-                    ],
                 ],
             ])
         );
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertJson($client->getResponse()->getContent());
-        $this->assertContains('"data"', $client->getResponse()->getContent());
+        $this->assertEquals(204, $client->getResponse()->getStatusCode());
     }
 }

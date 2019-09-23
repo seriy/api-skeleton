@@ -20,6 +20,9 @@ class UserNormalizer implements NormalizerInterface, CacheableSupportsMethodInte
             'type' => UserInterface::NAME,
             'id' => (string) $user->getId(),
             'attributes' => [
+                'firstName' => $user->getFirstName(),
+                'lastName' => $user->getLastName(),
+                'fullName' => $user->getFullName(),
                 'photo' => $user->getPhoto(),
                 'email' => $user->getEmail(),
                 'username' => $user->getUsername(),

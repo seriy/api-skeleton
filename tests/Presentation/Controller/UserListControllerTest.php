@@ -22,7 +22,7 @@ class UserListControllerTest extends WebTestCase
     public function testSuccess()
     {
         $client = $this->createClientWithJwt(getenv('USERNAME'), getenv('PASSWORD'));
-        $client->request('GET', '/v1.0/users?filter[id]=1,2&filter[username]=u&sort=-id,username');
+        $client->request('GET', '/v1.0/users?filter[id]=1,2&filter[username]=u&filter[firstName]=u&filter[lastName]=u&sort=-id,username');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertJson($client->getResponse()->getContent());

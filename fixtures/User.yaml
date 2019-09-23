@@ -3,6 +3,8 @@ App\Domain\Entity\User:
         email (unique): 'username@example.com'
         username (unique): 'username'
         password: '\$argon2id\$v=19\$m=65536,t=4,p=1\$FfJYqfgbnqhTRiOg2oBbog\$rnN5oJjMuVUgrOS4UmEHzVxxUypgodthKABUviGCBrQ'
+        firstName: <firstName()>
+        lastName: <lastName()>
         roles: ['ROLE_ADMIN']
         emailConfirmationToken: 'EmailConfirmationTokenEmailConfirmationT'
         emailConfirmationRequestedAt: <identity(new \DateTimeImmutable())>
@@ -12,6 +14,8 @@ App\Domain\Entity\User:
         email (unique): 'deleted@example.com'
         username (unique): 'deleted'
         password: '\$argon2id\$v=19\$m=65536,t=4,p=1\$FfJYqfgbnqhTRiOg2oBbog\$rnN5oJjMuVUgrOS4UmEHzVxxUypgodthKABUviGCBrQ'
+        firstName: <firstName()>
+        lastName: <lastName()>
         roles: ['ROLE_USER']
         emailConfirmed: true
         deletedAt: <identity(new \DateTimeImmutable())>
@@ -19,5 +23,7 @@ App\Domain\Entity\User:
         email (unique): <email()>
         username (unique): <username()>
         password: <text(10)>
+        firstName: <firstName()>
+        lastName: <lastName()>
         roles: ['ROLE_USER']
         emailConfirmed: true

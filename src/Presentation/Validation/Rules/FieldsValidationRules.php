@@ -10,7 +10,7 @@ use function array_unique;
 
 class FieldsValidationRules
 {
-    public function getRules(array $fields = []): Constraint
+    public static function getRules(array $fields = []): Constraint
     {
         $constraints = [];
 

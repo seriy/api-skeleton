@@ -12,9 +12,9 @@ class UserListValidationRules implements ValidationRulesInterface
     public function getRules(): Constraint
     {
         return new Assert\Collection(['fields' => [
-            'filter' => FilterValidationRules::getRules(['id', 'username']),
+            'filter' => FilterValidationRules::getRules(['id', 'username', 'firstName', 'lastName']),
             'page' => PageValidationRules::getRules(),
-            'sort' => SortValidationRules::getRules(['id', 'username']),
+            'sort' => SortValidationRules::getRules(['id', 'username', 'firstName', 'lastName']),
         ]]);
     }
 }

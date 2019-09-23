@@ -50,7 +50,10 @@ class EditUserInteractor implements InteractorInterface
             $user->setEmailConfirmationToken((new TokenGenerator())->generateToken());
             $user->setEmailConfirmationRequestedAt(new DateTimeImmutable());
         }
+
         $user->setUsername($input->username);
+        $user->setFirstName($input->firstName);
+        $user->setLastName($input->lastName);
         $this->userRepository->saveUser($user);
 
         // todo: send email with confirmation token

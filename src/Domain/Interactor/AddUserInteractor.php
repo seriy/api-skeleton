@@ -41,7 +41,13 @@ class AddUserInteractor implements InteractorInterface
             throw new DomainException(UserError::USERNAME_TAKEN, [$input->username]);
         }
 
-        $user = $this->userFactory->create($input->email, $input->username, $input->password);
+        $user = $this->userFactory->create(
+            $input->email,
+            $input->password,
+            $input->username,
+            $input->firstName,
+            $input->lastName
+        );
         $user->setEmailConfirmationToken((new TokenGenerator())->generateToken());
         $user->setEmailConfirmationRequestedAt(new DateTimeImmutable());
         $this->userRepository->saveUser($user);

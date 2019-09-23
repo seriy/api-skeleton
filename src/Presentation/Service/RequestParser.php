@@ -88,20 +88,41 @@ class RequestParser
 
     public function getInt(string $key): int
     {
-        return (int) $this->getItem($key, $this->content);
+        return (int) $this->getIntOrNull($key);
+    }
+
+    public function getIntOrNull(string $key): ?int
+    {
+        $value = $this->getItem($key, $this->content);
+
+        return null === $value ? null : (int) $value;
     }
 
     public function getFloat(string $key): float
     {
-        return (float) $this->getItem($key, $this->content);
+        return (float) $this->getFloatOrNull($key);
+    }
+
+    public function getFloatOrNull(string $key): ?float
+    {
+        $value = $this->getItem($key, $this->content);
+
+        return null === $value ? null : (float) $value;
     }
 
     public function getString(string $key): string
     {
-        return (string) $this->getItem($key, $this->content);
+        return (string) $this->getStringOrNull($key);
     }
 
-    public function getData(): array
+    public function getStringOrNull(string $key): ?string
+    {
+        $value = $this->getItem($key, $this->content);
+
+        return null === $value ? null : (string) $value;
+    }
+
+    private function getData(): array
     {
         $query = $this->request->query->all();
 

@@ -86,4 +86,9 @@ class UserError
         'status' => 409,
         'message' => 'User with ID \'%d\' is active.',
     ];
+    public const PROVIDER_NOT_SUPPORTED = [
+        'code' => 1016,
+        'status' => 400,
+        'message' => '\'%s\' provider is not supported.',
+    ];
 }

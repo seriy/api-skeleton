@@ -22,8 +22,11 @@ class AddUserControllerTest extends WebTestCase
                 'data' => [
                     'type' => 'users',
                     'attributes' => [
-                        'email' => 'user@example.com',
-                        'username' => 'user',
+                        'email' => '',
+                        'username' => '',
+                        'password' => '',
+                        'firstName' => '',
+                        'lastName' => '',
                     ],
                 ],
             ])
@@ -50,6 +53,8 @@ class AddUserControllerTest extends WebTestCase
                         'email' => 'user@example.com',
                         'username' => 'user',
                         'password' => '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', // password
+                        'firstName' => 'first',
+                        'lastName' => 'last',
                     ],
                 ],
             ])

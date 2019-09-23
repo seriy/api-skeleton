@@ -8,6 +8,7 @@ use App\Domain\Entity\User;
 use App\Domain\Entity\UserInterface;
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
+use function implode;
 
 class UserTest extends TestCase
 {
@@ -15,6 +16,15 @@ class UserTest extends TestCase
     {
         $user = new User();
         $this->assertNull($user->getId());
+    }
+
+    public function testGoogleId()
+    {
+        $user = new User();
+        $this->assertNull($user->getGoogleId());
+
+        $user->setGoogleId($googleId = '123456789');
+        $this->assertEquals($googleId, $user->getGoogleId());
     }
 
     public function testEmail()
@@ -42,6 +52,29 @@ class UserTest extends TestCase
 
         $user->setPassword($password = 'password');
         $this->assertEquals($password, $user->getPassword());
+    }
+
+    public function testFirstName()
+    {
+        $user = new User();
+        $this->assertNull($user->getFirstName());
+
+        $user->setFirstName($firstName = 'first');
+        $this->assertEquals($firstName, $user->getFirstName());
+        $this->assertEquals($firstName, $user->getFullName());
+    }
+
+    public function testLastName()
+    {
+        $user = new User();
+        $this->assertNull($user->getLastName());
+
+        $user->setLastName($lastName = 'last');
+        $this->assertEquals($lastName, $user->getLastName());
+        $this->assertEquals($lastName, $user->getFullName());
+
+        $user->setFirstName($firstName = 'first');
+        $this->assertEquals(implode(' ', [$firstName, $lastName]), $user->getFullName());
     }
 
     public function testPhoto()

@@ -14,6 +14,8 @@ interface UserRepositoryInterface extends RepositoryInterface
 
     public function getUserByEmail(string $email): ?UserInterface;
 
+    public function getUserByGoogleId(string $googleId): ?UserInterface;
+
     public function getUserByEmailConfirmationToken(string $token): ?UserInterface;
 
     public function getUserByPasswordResettingToken(string $token): ?UserInterface;

@@ -34,9 +34,11 @@ use Symfony\Component\Routing\Annotation\Route;
  *          @OA\JsonContent(required={"type", "id", "attributes"},
  *              @OA\Property(property="type", type="string", example="users"),
  *              @OA\Property(property="id", type="string", example="1"),
- *              @OA\Property(property="attributes", required={"email", "username"},
+ *              @OA\Property(property="attributes", required={"email", "username", "firstName", "lastName"},
  *                  @OA\Property(property="email", type="string", example="email@domain.com"),
- *                  @OA\Property(property="username", type="string", example="username")
+ *                  @OA\Property(property="username", type="string", example="username"),
+ *                  @OA\Property(property="firstName", type="string", example="John"),
+ *                  @OA\Property(property="lastName", type="string", example="Doe")
  *              )
  *          )
  *      ),
@@ -72,6 +74,8 @@ class EditUserController extends AbstractController
             $this->request->getInt('userId'),
             $this->request->getString('data.attributes.email'),
             $this->request->getString('data.attributes.username'),
+            $this->request->getString('data.attributes.firstName'),
+            $this->request->getString('data.attributes.lastName')
         );
 
         $interactor->execute($input, $presenter);

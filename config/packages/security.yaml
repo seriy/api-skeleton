@@ -21,6 +21,15 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        connect:
+            pattern: ^/v(\d+\.\d+)/connect
+            stateless: true
+            anonymous: true
+            # https://symfony.com/doc/current/security/guard_authentication.html
+            guard:
+                provider: login_provider
+                authenticators:
+                    - App\Presentation\Security\OAuthAuthenticator
         login:
             pattern: ^/v(\d+\.\d+)/login
             stateless: true
@@ -46,5 +55,5 @@ security:
 
     # https://symfony.com/doc/current/security/access_control.html
     access_control:
-        - { path: ^/v(\d+\.\d+)/(confirm|login|refresh|register|reset|set), roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/v(\d+\.\d+)/(connect|confirm|login|refresh|register|reset|set), roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, roles: IS_AUTHENTICATED_FULLY }

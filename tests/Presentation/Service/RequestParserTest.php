@@ -38,6 +38,26 @@ class RequestParserTest extends TestCase
                 ],
             ]);
 
+        $post = $this->createMock(ParameterBag::class);
+        $post
+            ->expects($this->once())
+            ->method('all')
+            ->willReturn([
+                'post' => [
+                    'data' => 'value',
+                ],
+            ]);
+
+        $files = $this->createMock(ParameterBag::class);
+        $files
+            ->expects($this->once())
+            ->method('all')
+            ->willReturn([
+                'file' => [
+                    'value',
+                ],
+            ]);
+
         $attributes = $this->createMock(ParameterBag::class);
         $attributes
             ->expects($this->once())
@@ -63,6 +83,12 @@ class RequestParserTest extends TestCase
 
         $ref = new ReflectionProperty(Request::class, 'query');
         $ref->setValue($request, $query);
+
+        $ref = new ReflectionProperty(Request::class, 'request');
+        $ref->setValue($request, $post);
+
+        $ref = new ReflectionProperty(Request::class, 'files');
+        $ref->setValue($request, $files);
 
         $ref = new ReflectionProperty(Request::class, 'attributes');
         $ref->setValue($request, $attributes);
@@ -128,6 +154,10 @@ class RequestParserTest extends TestCase
                     'limit' => 1,
                     'offset' => 0,
                 ],
+                'post' => [
+                    'data' => 'value',
+                ],
+                'file' => ['value'],
                 'data' => [
                     'float' => 3.14,
                     'boolean' => true,

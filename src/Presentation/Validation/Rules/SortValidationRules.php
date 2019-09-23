@@ -22,6 +22,7 @@ class SortValidationRules
         return new Assert\Optional([
             new Assert\NotBlank(),
             new Assert\Type(['type' => 'array']),
+            new Assert\Count(['max' => ValidationRulesInterface::MAX_SORT_COUNT]),
             new Assert\All(new Assert\Type(['type' => 'string'])),
             new Assert\Choice(['choices' => array_unique($choices), 'multiple' => true]),
         ]);

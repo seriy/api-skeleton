@@ -10,6 +10,7 @@ use App\Domain\Input\AddOAuthProviderInput;
 use App\Domain\Interactor\AddOAuthProviderInteractor;
 use App\Domain\Presenter\PresenterInterface;
 use App\Domain\Repository\UserRepositoryInterface;
+use BadMethodCallException;
 use PHPUnit\Framework\TestCase;
 
 class AddOAuthProviderInteractorTest extends TestCase
@@ -52,7 +53,7 @@ class AddOAuthProviderInteractorTest extends TestCase
     {
         $input = new AddOAuthProviderInput($currentUserId = 1, $userId = 1, $provider = 'twitter', $providerId = '100');
 
-        $this->expectException(DomainException::class);
+        $this->expectException(BadMethodCallException::class);
 
         $userRepository = $this->createMock(UserRepositoryInterface::class);
         $userRepository

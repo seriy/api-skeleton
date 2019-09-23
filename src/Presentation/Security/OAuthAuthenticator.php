@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace App\Presentation\Security;
 
 use App\Domain\Entity\UserInterface as User;
-use App\Domain\Error\UserError;
 use App\Domain\Factory\UserFactory;
 use App\Domain\Repository\UserRepositoryInterface;
 use App\Domain\Security\PasswordGenerator;
 use App\Presentation\Error\AuthenticationError;
 use App\Presentation\Exception\PresentationException;
 use App\Presentation\Service\RequestParser;
+use BadMethodCallException;
 use Exception;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use KnpU\OAuth2ClientBundle\Security\Authenticator\SocialAuthenticator;
@@ -23,6 +23,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use function in_array;
+use function sprintf;
 
 class OAuthAuthenticator extends SocialAuthenticator
 {
@@ -57,14 +58,14 @@ class OAuthAuthenticator extends SocialAuthenticator
     public function getCredentials(Request $request)
     {
         if (!in_array($provider = $this->requestParser->getString('provider'), User::SUPPORTED_OAUTH_PROVIDERS, true)) {
-            throw new PresentationException(UserError::PROVIDER_NOT_SUPPORTED, [$provider]);
+            throw new PresentationException(AuthenticationError::PROVIDER_NOT_SUPPORTED, [$provider]);
+        }
+
+        if (!$code = $this->requestParser->getString('code')) {
+            throw new PresentationException(AuthenticationError::AUTHORIZATION_CODE_NOT_FOUND);
         }
 
         $client = $this->clientRegistry->getClient($provider);
-
-        if (!$code = $this->requestParser->getString('data.attributes.code')) {
-            throw new PresentationException(AuthenticationError::AUTHORIZATION_CODE_NOT_FOUND);
-        }
 
         try {
             return $client->getOAuth2Provider()->getAccessToken('authorization_code', ['code' => $code]);
@@ -80,7 +81,7 @@ class OAuthAuthenticator extends SocialAuthenticator
     public function getUser($credentials, UserProviderInterface $userProvider): ?UserInterface
     {
         if (!in_array($provider = $this->requestParser->getString('provider'), User::SUPPORTED_OAUTH_PROVIDERS, true)) {
-            throw new PresentationException(UserError::PROVIDER_NOT_SUPPORTED, [$provider]);
+            throw new PresentationException(AuthenticationError::PROVIDER_NOT_SUPPORTED, [$provider]);
         }
 
         $account = $this->clientRegistry->getClient($provider)->fetchUserFromToken($credentials);
@@ -115,31 +116,25 @@ class OAuthAuthenticator extends SocialAuthenticator
         return $user;
     }
 
-    /**
-     * @throws \App\Presentation\Exception\PresentationException
-     */
     private function setProviderId(User $user, string $id): void
     {
         $provider = $this->requestParser->getString('provider');
 
         $method = 'set'.ucfirst(mb_strtolower($provider)).'Id';
         if (!method_exists($user, $method)) {
-            throw new PresentationException(UserError::PROVIDER_NOT_SUPPORTED, [$provider]);
+            throw new BadMethodCallException(sprintf('Method \'%s\' not found', $method));
         }
 
         $user->{$method}($id);
     }
 
-    /**
-     * @throws \App\Presentation\Exception\PresentationException
-     */
     private function getUserByProviderId(string $id): ?User
     {
         $provider = $this->requestParser->getString('provider');
 
         $method = 'getUserBy'.ucfirst(mb_strtolower($provider)).'Id';
         if (!method_exists($this->userRepository, $method)) {
-            throw new PresentationException(UserError::PROVIDER_NOT_SUPPORTED, [$provider]);
+            throw new BadMethodCallException(sprintf('Method \'%s\' not found', $method));
         }
 
         return $this->userRepository->{$method}($id);
@@ -155,15 +150,15 @@ class OAuthAuthenticator extends SocialAuthenticator
      */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
     {
-        throw new PresentationException(AuthenticationError::BAD_CREDENTIALS);
+        throw new PresentationException(AuthenticationError::BAD_CREDENTIALS, [], $exception);
     }
 
     /**
      * @throws \App\Presentation\Exception\PresentationException
      */
-    public function start(Request $request, AuthenticationException $authException = null): Response
+    public function start(Request $request, AuthenticationException $exception = null): Response
     {
-        throw new PresentationException(AuthenticationError::AUTHORIZATION_CODE_NOT_FOUND);
+        throw new PresentationException(AuthenticationError::AUTHORIZATION_CODE_NOT_FOUND, [], $exception);
     }
 
     public function supportsRememberMe(): bool

@@ -10,6 +10,7 @@ use App\Domain\Input\RemoveOAuthProviderInput;
 use App\Domain\Interactor\RemoveOAuthProviderInteractor;
 use App\Domain\Presenter\PresenterInterface;
 use App\Domain\Repository\UserRepositoryInterface;
+use BadMethodCallException;
 use PHPUnit\Framework\TestCase;
 
 class RemoveOAuthProviderInteractorTest extends TestCase
@@ -52,7 +53,7 @@ class RemoveOAuthProviderInteractorTest extends TestCase
     {
         $input = new RemoveOAuthProviderInput($currentUserId = 1, $userId = 1, $provider = 'twitter');
 
-        $this->expectException(DomainException::class);
+        $this->expectException(BadMethodCallException::class);
 
         $userRepository = $this->createMock(UserRepositoryInterface::class);
         $userRepository

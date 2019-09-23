@@ -10,8 +10,10 @@ use App\Domain\Input\AddOAuthProviderInput;
 use App\Domain\Output\AddOAuthProviderOutput;
 use App\Domain\Presenter\PresenterInterface;
 use App\Domain\Repository\UserRepositoryInterface;
+use BadMethodCallException;
 use function mb_strtolower;
 use function method_exists;
+use function sprintf;
 use function ucfirst;
 
 class AddOAuthProviderInteractor implements InteractorInterface
@@ -38,7 +40,7 @@ class AddOAuthProviderInteractor implements InteractorInterface
 
         $method = 'set'.ucfirst(mb_strtolower($input->provider)).'Id';
         if (!method_exists($user, $method)) {
-            throw new DomainException(UserError::PROVIDER_NOT_SUPPORTED, [$input->provider]);
+            throw new BadMethodCallException(sprintf('Method \'%s\' not found', $method));
         }
 
         $user->{$method}($input->providerId);

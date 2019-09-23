@@ -15,7 +15,7 @@ class OAuthLoginControllerTest extends WebTestCase
 
         $this->assertEquals(400, $client->getResponse()->getStatusCode());
         $this->assertJson($client->getResponse()->getContent());
-        $this->assertContains('"code":1016', $client->getResponse()->getContent());
+        $this->assertContains('"code":8', $client->getResponse()->getContent());
     }
 
     public function testCodeNotFound()
@@ -38,12 +38,7 @@ class OAuthLoginControllerTest extends WebTestCase
             [],
             [],
             json_encode([
-                'data' => [
-                    'type' => 'users',
-                    'attributes' => [
-                        'code' => '4/rQEr5DHX11CFp8VruEMecYazHJOZRe_Ea8vIVCMqkGKKaDK2oChpU9RD2830oJm_lEc_Te8jrFJiBW5ga5ygOGU',
-                    ],
-                ],
+                'code' => '4/rQEr5DHX11CFp8VruEMecYazHJOZRe_Ea8vIVCMqkGKKaDK2oChpU9RD2830oJm_lEc_Te8jrFJiBW5ga5ygOGU',
             ])
         );
 
@@ -62,12 +57,7 @@ class OAuthLoginControllerTest extends WebTestCase
             [],
             [],
             json_encode([
-                'data' => [
-                    'type' => 'users',
-                    'attributes' => [
-                        'code' => '4/rQEr5DHX11CFp8VruEMecYazHJOZRe_Ea8vIVCMqkGKKaDK2oChpU9RD2830oJm_lEc_Te8jrFJiBW5ga5ygOGU',
-                    ],
-                ],
+                'code' => '4/rQEr5DHX11CFp8VruEMecYazHJOZRe_Ea8vIVCMqkGKKaDK2oChpU9RD2830oJm_lEc_Te8jrFJiBW5ga5ygOGU',
             ])
         );
 

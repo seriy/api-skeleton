@@ -41,4 +41,9 @@ class AuthenticationError
         'status' => 401,
         'message' => 'Authorization code not found.',
     ];
+    public const PROVIDER_NOT_SUPPORTED = [
+        'code' => 8,
+        'status' => 400,
+        'message' => '\'%s\' provider is not supported.',
+    ];
 }
